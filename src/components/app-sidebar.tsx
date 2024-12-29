@@ -24,7 +24,7 @@ const data = {
     navMain: [
         {
             title: "Linguagens, Códigos e suas Tecnologias",
-            url: "#",
+            url: "/student-home/linguagens-codigos-tecnologias",
             icon: Calculator,
             isActive: true,
             items: [
@@ -56,7 +56,7 @@ const data = {
         },
         {
             title: "Matemática e suas Tecnologias",
-            url: "#",
+            url: "/student-home/matematica-e-tecnologias",
             icon: Bot,
             items: [
                 {
@@ -87,7 +87,7 @@ const data = {
         },
         {
             title: "Ciências da Natureza e suas Tecnologias",
-            url: "#",
+            url: "/student-home/ciencias-da-natureza-e-tecnologias",
             icon: FlaskConical,
             items: [
                 {
@@ -110,7 +110,7 @@ const data = {
         },
         {
             title: "Ciências Humanas e suas Tecnologias",
-            url: "#",
+            url: "/student-home/ciencias-humanas-e-tecnologias",
             icon: Globe,
             items: [
                 {
@@ -170,12 +170,12 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                 <SidebarMenu>
                     <SidebarMenuItem>
                         <SidebarMenuButton size="lg" asChild>
-                            <a href="/">
+                            <a href="/student-home">
                                 <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
                                     <Command className="size-4" />
                                 </div>
                                 <div className="grid flex-1 text-left text-sm leading-tight">
-                                    <span className="truncate font-semibold">ENEM - LMS</span>
+                                    <span className="truncate font-semibold">ENEM A.I - LMS</span>
                                     <span className="truncate text-xs">by devLeoFRS</span>
                                 </div>
                             </a>

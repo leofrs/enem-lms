@@ -1,8 +1,7 @@
 import * as React from "react";
-import { FlaskConical, Bot, Command, Frame, LifeBuoy, Map, PieChart, Send, Globe, Calculator } from "lucide-react";
+import { FlaskConical, Command, Bot, Send, Globe, Calculator } from "lucide-react";
 
 import { NavMain } from "@/components/nav-main";
-import { NavProjects } from "@/components/nav-projects";
 import { NavSecondary } from "@/components/nav-secondary";
 import { NavUser } from "@/components/nav-user";
 import {
@@ -14,6 +13,7 @@ import {
     SidebarMenuButton,
     SidebarMenuItem,
 } from "@/components/ui/sidebar";
+import ModalAi from "./modal-ai";
 
 const data = {
     user: {
@@ -134,31 +134,14 @@ const data = {
     ],
     navSecondary: [
         {
-            title: "Support",
+            title: <ModalAi />,
             url: "#",
-            icon: LifeBuoy,
+            icon: Bot,
         },
         {
             title: "Feedback",
             url: "#",
             icon: Send,
-        },
-    ],
-    projects: [
-        {
-            name: "Design Engineering",
-            url: "#",
-            icon: Frame,
-        },
-        {
-            name: "Sales & Marketing",
-            url: "#",
-            icon: PieChart,
-        },
-        {
-            name: "Travel",
-            url: "#",
-            icon: Map,
         },
     ],
 };

@@ -26,7 +26,7 @@ const FormAi = () => {
         resolver: zodResolver(schema),
     });
 
-    const { setText, isLoading, setIsLoading } = useAIChat();
+    const { isLoading, setIsLoading } = useAIChat();
 
     const onSubmit = async (data: FormData) => {
         const { text } = data;
@@ -39,7 +39,7 @@ const FormAi = () => {
         try {
             setIsLoading(true);
             const response = await aiChat(text);
-            setText("ola mundo");
+            console.log(response);
         } catch (error) {
             alert("Error encontrado" + error);
         } finally {

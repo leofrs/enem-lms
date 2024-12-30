@@ -9,6 +9,7 @@ import LinguagemCodigosTecnologias from "@/pages/privatePage/linguagensCodigosTe
 import MatematicaETecnologias from "@/pages/privatePage/matematicaETecnologias";
 import CienciasNatureza from "@/pages/privatePage/cienciasNatureza";
 import CienciasHumanas from "@/pages/privatePage/cienciasHumanas";
+import CreateWithAi from "@/pages/privatePage/CreateWithAi";
 
 export const router = createBrowserRouter([
     {
@@ -51,6 +52,10 @@ export const router = createBrowserRouter([
             {
                 path: "ciencias-humanas-e-tecnologias",
                 element: <CienciasHumanas />,
+            },
+            {
+                path: "create-with-ai",
+                element: <CreateWithAi />,
             },
         ],
     },

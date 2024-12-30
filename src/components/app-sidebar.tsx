@@ -13,7 +13,6 @@ import {
     SidebarMenuButton,
     SidebarMenuItem,
 } from "@/components/ui/sidebar";
-import ModalAi from "./modal-ai";
 
 const data = {
     user: {
@@ -134,8 +133,8 @@ const data = {
     ],
     navSecondary: [
         {
-            title: <ModalAi />,
-            url: "#",
+            title: "Create with AI",
+            url: "/student-home/create-with-ai",
             icon: Bot,
         },
         {

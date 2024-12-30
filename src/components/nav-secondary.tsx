@@ -14,7 +14,7 @@ export function NavSecondary({
     ...props
 }: {
     items: {
-        title: string | React.JSX.Element;
+        title: string;
         url: string;
         icon: LucideIcon;
     }[];

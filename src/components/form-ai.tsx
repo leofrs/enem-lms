@@ -1,15 +1,16 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Send } from "lucide-react";
+import { Send, Loader } from "lucide-react";
 
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { aiChat } from "@/apis/ai-chat";
+import useAIChat from "@/hooks/use-aiChat";
 
 const schema = z.object({
-    text: z.string().max(100, { message: "Máximo de 100 caracteres" }),
+    text: z.string().max(100, { message: "Máximo de 100 caracteres" }).nullable(),
 });
 
 type FormData = z.infer<typeof schema>;
@@ -25,9 +26,25 @@ const FormAi = () => {
         resolver: zodResolver(schema),
     });
 
-    const onSubmit = (data: FormData) => {
-        console.log(data);
-        sessionStorage.setItem("text", data.text);
+    const { setText, isLoading, setIsLoading } = useAIChat();
+
+    const onSubmit = async (data: FormData) => {
+        const { text } = data;
+
+        if (!text) {
+            alert("Digite algo");
+            return;
+        }
+
+        try {
+            setIsLoading(true);
+            const response = await aiChat(text);
+            setText("ola mundo");
+        } catch (error) {
+            alert("Error encontrado" + error);
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     useEffect(() => {
@@ -45,7 +62,7 @@ const FormAi = () => {
                     type="submit"
                     className="px-6 py-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 flex items-center gap-2"
                 >
-                    <Send size={20} />
+                    {isLoading ? <Loader size={20} className="animate-spin" /> : <Send size={20} />}
                 </Button>
             </div>
         </form>

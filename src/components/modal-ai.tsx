@@ -7,26 +7,14 @@ import {
     DialogTrigger,
 } from "@/components/ui/dialog";
 import FormAi from "./form-ai";
-import { useEffect, useState } from "react";
+import useAIChat from "@/hooks/use-aiChat";
 
 const ModalAi = () => {
-    const [messages, setMessages] = useState([
-        { id: 1, text: "Olá! Me chamo Enem AI. Me pergunte qualquer coisa sobre os seus estudos!", type: "ai" },
-    ]);
+    // const [messages, setMessages] = useState([
+    //     { id: 1, text: "Olá! Me chamo Enem AI. Me pergunte qualquer coisa sobre os seus estudos!", type: "ai" },
+    // ]);
 
-    const [isLoading, setIsLoading] = useState(false);
-    const getQuestion = sessionStorage.getItem("text");
-
-    useEffect(() => {
-        setIsLoading(true);
-        if (getQuestion !== null) {
-            setMessages((prevMessages) => [
-                ...prevMessages,
-                { id: prevMessages.length + 1, text: getQuestion!, type: "user" },
-            ]);
-        }
-        setIsLoading(false);
-    }, [getQuestion]);
+    const { text, isLoading } = useAIChat();
 
     return (
         <Dialog>
@@ -42,7 +30,12 @@ const ModalAi = () => {
                         </div>
 
                         <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-gray-50">
-                            {messages.map((message) => (
+                            {isLoading ? (
+                                <p>Carregando...</p> // Mensagem de carregamento
+                            ) : (
+                                <p>{text || "Nenhuma resposta da A.I."}</p> // Exibe o texto ou mensagem padrão
+                            )}
+                            {/* {messages.map((message) => (
                                 <div
                                     key={message.id}
                                     className={`flex ${message.type === "user" ? "justify-end" : "justify-start"}`}
@@ -57,14 +50,7 @@ const ModalAi = () => {
                                         {message.text}
                                     </div>
                                 </div>
-                            ))}
-                            {isLoading && (
-                                <div className="flex items-center space-x-2 text-gray-500">
-                                    <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" />
-                                    <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce delay-100" />
-                                    <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce delay-200" />
-                                </div>
-                            )}
+                            ))} */}
                         </div>
                     </DialogTitle>
                     <DialogDescription>

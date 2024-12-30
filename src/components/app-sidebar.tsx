@@ -1,5 +1,5 @@
 import * as React from "react";
-import { FlaskConical, Command, Bot, Send, Globe, Calculator } from "lucide-react";
+import { FlaskConical, Command, Bot, Send, Globe, Calculator, Book } from "lucide-react";
 
 import { NavMain } from "@/components/nav-main";
 import { NavSecondary } from "@/components/nav-secondary";
@@ -142,6 +142,11 @@ const data = {
             title: "Feedback",
             url: "#",
             icon: Send,
+        },
+        {
+            title: "Cronograma de estudos",
+            url: "#",
+            icon: Book,
         },
     ],
 };

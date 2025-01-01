@@ -1,5 +1,7 @@
 import { FlaskConical, Globe, Calculator, Book } from "lucide-react";
 import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 
 import {
     DropdownMenu,
@@ -8,123 +10,145 @@ import {
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
+const areas = [
+    {
+        id: 1,
+        name: "Linguagens",
+        icon: Book,
+    },
+    {
+        id: 2,
+        name: "Matemática",
+        icon: Calculator,
+    },
+    {
+        id: 3,
+        name: "Ciências Natureza",
+        icon: FlaskConical,
+    },
+    {
+        id: 4,
+        name: "Ciências Humanas",
+        icon: Globe,
+    },
+];
+
+const options = [
+    {
+        linguagens: [
+            {
+                id: 1,
+                name: "Português",
+            },
+            {
+                id: 2,
+                name: "Literatura",
+            },
+            {
+                id: 3,
+                name: "Artes",
+            },
+            {
+                id: 4,
+                name: "Tecnologia da Informação",
+            },
+            {
+                id: 5,
+                name: "Língua Estrangeira",
+            },
+        ],
+        matematica: [
+            {
+                id: 1,
+                name: "Matemática",
+            },
+            {
+                id: 2,
+                name: "Álgebra",
+            },
+            {
+                id: 3,
+                name: "Geometria",
+            },
+            {
+                id: 4,
+                name: "Probabilidade e Estatística",
+            },
+            {
+                id: 5,
+                name: "Matemática Financeira",
+            },
+        ],
+        natureza: [
+            {
+                id: 1,
+                name: "Química",
+            },
+            {
+                id: 2,
+                name: "Física",
+            },
+            {
+                id: 3,
+                name: "Biologia",
+            },
+            {
+                id: 4,
+                name: "Meio Ambiente",
+            },
+        ],
+        humanas: [
+            {
+                id: 1,
+                name: "História",
+            },
+            {
+                id: 2,
+                name: "Geografia",
+            },
+            {
+                id: 3,
+                name: "Filosofia",
+            },
+            {
+                id: 4,
+                name: "Sociologia",
+            },
+        ],
+    },
+];
+
 const CreateWithAi = () => {
     const [selected, setSelected] = useState<string>("");
+    const [optiosInfo, setOptionsInfo] = useState<string>("");
+    const [inputValue, setInputValue] = useState("");
 
-    const areas = [
-        {
-            id: 1,
-            name: "Linguagens",
-            icon: Book,
-        },
-        {
-            id: 2,
-            name: "Matemática",
-            icon: Calculator,
-        },
-        {
-            id: 3,
-            name: "Ciências Natureza",
-            icon: FlaskConical,
-        },
-        {
-            id: 4,
-            name: "Ciências Humanas",
-            icon: Globe,
-        },
-    ];
-
-    const options = [
-        {
-            linguagens: [
-                {
-                    id: 1,
-                    name: "Português",
-                },
-                {
-                    id: 2,
-                    name: "Literatura",
-                },
-                {
-                    id: 3,
-                    name: "Artes",
-                },
-                {
-                    id: 4,
-                    name: "Tecnologia da Informação",
-                },
-                {
-                    id: 5,
-                    name: "Língua Estrangeira",
-                },
-            ],
-            matematica: [
-                {
-                    id: 1,
-                    name: "Matemática",
-                },
-                {
-                    id: 2,
-                    name: "Álgebra",
-                },
-                {
-                    id: 3,
-                    name: "Geometria",
-                },
-                {
-                    id: 4,
-                    name: "Probabilidade e Estatística",
-                },
-                {
-                    id: 5,
-                    name: "Matemática Financeira",
-                },
-            ],
-            natureza: [
-                {
-                    id: 1,
-                    name: "Química",
-                },
-                {
-                    id: 2,
-                    name: "Física",
-                },
-                {
-                    id: 3,
-                    name: "Biologia",
-                },
-                {
-                    id: 4,
-                    name: "Meio Ambiente",
-                },
-            ],
-            humanas: [
-                {
-                    id: 1,
-                    name: "História",
-                },
-                {
-                    id: 2,
-                    name: "Geografia",
-                },
-                {
-                    id: 3,
-                    name: "Filosofia",
-                },
-                {
-                    id: 4,
-                    name: "Sociologia",
-                },
-            ],
-        },
-    ];
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setInputValue(event.target.value);
+    };
 
     const handleClickAreas = (name: string) => {
         setSelected(name);
-        console.log(name);
     };
+
     const handleClickOptions = (name: string) => {
-        console.log(name);
+        setOptionsInfo(name);
+    };
+
+    const handleSubmit = () => {
+        if (selected === "") {
+            alert("Selecione uma area");
+            return;
+        }
+        if (optiosInfo === "") {
+            alert("Selecione uma opção");
+            return;
+        }
+        if (inputValue === "") {
+            alert("Insira um conteúdo");
+            return;
+        }
+        console.log(selected, " - ", optiosInfo, " - ", inputValue);
     };
 
     return (
@@ -213,6 +237,31 @@ const CreateWithAi = () => {
                                 : null}
                         </DropdownMenuContent>
                     </DropdownMenu>
+
+                    <p className={`mt-4  ${optiosInfo !== "" ? "text-blue-400" : "text-gray-400"}`}>
+                        Conteúdo Selecionado: {optiosInfo ? optiosInfo : "Nenhum conteúdo selecionado"}
+                    </p>
+                </div>
+
+                <div className="mt-10 flex flex-col  space-x-2">
+                    <h2 className="text-center mb-5 text-lg">
+                        Por fim, qual assunto do conteúdo selecionado deseja uma plano personalizado?
+                    </h2>
+                    <div className="flex  gap-2 w-full  items-center">
+                        <Input
+                            type="text"
+                            value={inputValue}
+                            onChange={handleChange}
+                            placeholder="Qual o inicio e fim da segunda guerra mundial?"
+                        />
+                        <Button
+                            type="submit"
+                            onClick={() => handleSubmit()}
+                            disabled={selected === null || selected === "" || optiosInfo === null || optiosInfo === ""}
+                        >
+                            Criar
+                        </Button>
+                    </div>
                 </div>
             </div>
         </div>

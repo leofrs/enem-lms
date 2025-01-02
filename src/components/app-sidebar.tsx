@@ -29,27 +29,27 @@ const data = {
             items: [
                 {
                     title: "Português",
-                    url: "#",
+                    url: "/student-home/linguagens-codigos-tecnologias/material/portugues",
                 },
                 {
                     title: "Literatura",
-                    url: "#",
+                    url: "/student-home/linguagens-codigos-tecnologias/material/literatura",
                 },
                 {
                     title: "Artes",
-                    url: "#",
+                    url: "/student-home/linguagens-codigos-tecnologias/material/artes",
                 },
                 {
                     title: "Educação Física",
-                    url: "#",
+                    url: "/student-home/linguagens-codigos-tecnologias/material/educacao-fisica",
                 },
                 {
                     title: "Tecnologias da Informação",
-                    url: "#",
+                    url: "/student-home/linguagens-codigos-tecnologias/material/tecnologia-informacao",
                 },
                 {
                     title: "Língua Estrangeira",
-                    url: "#",
+                    url: "/student-home/linguagens-codigos-tecnologias/material/lingua-estrangeira",
                 },
             ],
         },

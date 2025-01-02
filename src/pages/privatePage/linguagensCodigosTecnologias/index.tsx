@@ -1,60 +1,46 @@
+import { StudentContent } from "@/apis/student-content";
 import { Card, CardContent } from "@/components/ui/card";
 import { FileText } from "lucide-react";
+import { useEffect, useState } from "react";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
-
-const data = [
-    {
-        id: 1,
-        title: "Português",
-        description: "Descrição aqui",
-        icon: <FileText className="h-8 w-8 text-blue-500" />,
-        link: "material/portugues",
-    },
-    {
-        id: 2,
-        title: "Literatura",
-        description: "Descrição aqui",
-        icon: <FileText className="h-8 w-8 text-blue-500" />,
-        link: "material/literatura",
-    },
-    {
-        id: 3,
-        title: "Artes",
-        description: "Descrição aqui",
-        icon: <FileText className="h-8 w-8 text-blue-500" />,
-        link: "material/artes",
-    },
-    {
-        id: 4,
-        title: "Educação Física",
-        description: "Descrição aqui",
-        icon: <FileText className="h-8 w-8 text-blue-500" />,
-        link: "material/educacao-fisica",
-    },
-    {
-        id: 5,
-        title: "Tecnologia da Informação",
-        description: "Descrição aqui",
-        icon: <FileText className="h-8 w-8 text-blue-500" />,
-        link: "material/tecnologia-da-informacao",
-    },
-    {
-        id: 6,
-        title: "Língua Estrangeira",
-        description: "Descrição aqui",
-        icon: <FileText className="h-8 w-8 text-blue-500" />,
-        link: "material/lingua-estrangeira",
-    },
-];
 
 const LinguagemCodigosTecnologias = () => {
     const navigate = useNavigate();
-    const handleNavigate = (link: string) => {
-        navigate(link);
-    };
 
     const url = useLocation();
     const isActive = url.pathname.includes("material");
+
+    const [title, setTitle] = useState([]);
+
+    useEffect(() => {
+        try {
+            const getAllContent = async () => {
+                const getSessioUserId = sessionStorage.getItem("studentId");
+                if (getSessioUserId) {
+                    try {
+                        const response = await StudentContent(parseInt(getSessioUserId));
+                        const linguagensDisciplinas = response
+                            .filter((res: any) => res.title === "linguagensCodigosETecnologias")
+                            .map((res: any) => res.disciplines)
+                            .flat();
+                        setTitle(linguagensDisciplinas);
+                    } catch (error) {
+                        console.error("Erro ao obter conteúdo:", error);
+                    }
+                }
+            };
+
+            getAllContent();
+        } catch (error) {
+            console.log("Error encontered:", error);
+        }
+    }, []);
+
+    const handleNavigate = (disciplineId: number) => {
+        console.log(disciplineId);
+
+        navigate(`material/${disciplineId}`);
+    };
 
     return (
         <>
@@ -62,21 +48,21 @@ const LinguagemCodigosTecnologias = () => {
                 <Outlet />
             ) : (
                 <div className="overflow-y-auto max-h-[750px]">
-                    {data.map((item) => (
+                    {title.map((item: any) => (
                         <Card
                             key={item.id}
                             className="hover:shadow-lg transition-shadow cursor-pointer mt-4 md:0"
-                            onClick={() => handleNavigate(item.link)}
+                            onClick={() => handleNavigate(item.id)}
                         >
                             <CardContent className="flex items-center p-6 space-x-4">
-                                {item.icon}
+                                <FileText />
                                 <div>
                                     <h3 className="text-lg font-semibold">{item.title}</h3>
-                                    <p className="text-sm text-muted-foreground">{item.description}</p>
+                                    {/* <p className="text-sm text-muted-foreground">{item.description}</p> */}
                                 </div>
                             </CardContent>
                         </Card>
-                    ))}
+                    ))}{" "}
                 </div>
             )}
         </>

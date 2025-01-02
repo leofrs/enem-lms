@@ -43,7 +43,7 @@ export const router = createBrowserRouter([
                 element: <LinguagemCodigosTecnologias />,
                 children: [
                     {
-                        path: "material/:id",
+                        path: "material/:disciplineId",
                         element: <Material />,
                     },
                 ],
